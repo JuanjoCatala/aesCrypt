@@ -75,11 +75,12 @@ def printEncryptOutput(filename):
 
 # -------------------------------------------------------------------------------------------------------
 def printDecryptOutput(filename):
+    output_name = filename.split(".aes")
     print(" ")
-    print(f'File {filename}' + '.aes ' +  'succesfully decrypted (' + str(datetime.datetime.now()) + ")")
+    print(f'File {filename}' +  ' succesfully decrypted (' + str(datetime.datetime.now()) + ")")
     print(" ")
-    print(f'  Output File --> {filename}')
-    print("   File Size --> " +  str(getFileSize(filename)) + " bytes")
+    print("  Output File --> " + str(output_name[0]))
+    print("  File Size --> " +  str(getFileSize(filename)) + " bytes")
     print(" ")
 
 # -------------------------------------------------------------------------------------------------------
