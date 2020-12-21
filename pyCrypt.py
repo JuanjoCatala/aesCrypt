@@ -2,7 +2,6 @@
 
 import os
 import sys
-import time
 import datetime
 import argparse
 import pyAesCrypt
@@ -45,8 +44,12 @@ def encryptor(filename, password, bufferSize):      # recieves array of filename
 def decryptor(filename, password, bufferSize):
     try:
         output_name = filename.split(".aes")
-        pyAesCrypt.decryptFile(filename + ".aes", output_name[0], password, bufferSize)
+        pyAesCrypt.decryptFile(filename, output_name[0], password, bufferSize)
         print("decrypting...")
+
+    except ValueError:
+        print("Password not valid or file is corrupted")
+        sys.exit()
     except:
         print("Error decrypting file :(")
         if os.path.exists(filename.split(".aes")):
@@ -72,10 +75,12 @@ def printEncryptOutput(filename):
 
 # -------------------------------------------------------------------------------------------------------
 def printDecryptOutput(filename):
-    print(f'File {filename}' + '.aes ' +  'succesfully decryptedi (' + str(datetime.datetime.now()) + ")")
     print(" ")
-    print(f'    Output File --> {filename}')
+    print(f'File {filename}' + '.aes ' +  'succesfully decrypted (' + str(datetime.datetime.now()) + ")")
+    print(" ")
+    print(f'  Output File --> {filename}')
     print("   File Size --> " +  str(getFileSize(filename)) + " bytes")
+    print(" ")
 
 # -------------------------------------------------------------------------------------------------------
 def main():
@@ -86,7 +91,8 @@ def main():
    
     file_path = os.path.split(arg.file)
     actual_path = os.getcwd()
-
+    
+    print(" ")
     password = getpass.getpass(prompt='Enter password to encrypt (no echo): ')
     
     if arg.option == "encrypt" or arg.option == "Encrypt":
