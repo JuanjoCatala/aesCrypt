@@ -46,9 +46,13 @@ def decryptor(filename, password, bufferSize):
         output_name = filename.split(".aes")
         pyAesCrypt.decryptFile(filename, output_name[0], password, bufferSize)
         print("decrypting...")
-
+    
     except ValueError:
         print("Password not valid or file is corrupted")
+        sys.exit()
+
+    except OSError:
+        print("File not found")
         sys.exit()
     except:
         print("Error decrypting file :(")
@@ -112,6 +116,9 @@ def main():
 
 # ------- Calling main --------
 
-main()
+try:
+    main()
 
+except KeyboardInterrupt:
+    sys.exit()
 
