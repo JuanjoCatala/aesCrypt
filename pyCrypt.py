@@ -7,9 +7,6 @@ import argparse
 import pyAesCrypt
 import getpass
 
-args_check = False
-
-parser = argparse.ArgumentParser(description="Encrypt or Decrypt files with AES algorithm")
 parser.add_argument('-o', '--option', type=str, required=True, help="encrypt/decrypt")
 parser.add_argument('-f', '--file', type=str, required=True, help='file path')
 parser.add_argument('-b', '--buffer', type=int, required=False, help='define buffer size (by default 64)')
@@ -17,12 +14,6 @@ parser.add_argument
 
 arg = parser.parse_args()
 
-
-def clean():
-    if os.name == "posix":
-        os.system ("clear")
-    elif os.name == "ce" or os.name == "nt" or os.name == "dos":
-        os.system ("cls")
 
 # --------------------------------------------------------------------------------------------------------
 def encryptor(filename, password, bufferSize):      # recieves array of filenames and encrypt them
